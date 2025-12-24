@@ -1,0 +1,607 @@
+  <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hakkımda | Hale</title>
+
+  <link rel="icon" type="image/png" href="fav.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+
+
+    <style>
+
+        /* === GENEL AYARLAR === */
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+
+        body {
+
+            background-color: #442D1C;
+
+            color: #E8D1A7;
+
+            /* Tüm sayfa Raleway fontunda */
+
+            font-family: 'Raleway', sans-serif;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            min-height: 100vh;
+
+            text-align: center;
+
+            padding: 40px 20px;
+
+            overflow-x: hidden;
+
+        }
+
+
+
+        /* === BAŞLIK === */
+
+        h1.page-title {
+
+            font-weight: 100; /* Başlık İncecik (Hairline) kalmaya devam ediyor */
+
+            font-size: 5.5rem;
+
+            color: #E8D1A7;
+
+            text-transform: uppercase;
+
+            line-height: 1;
+
+            display: flex;
+
+            gap: 1.8rem;
+
+            justify-content: center;
+
+            margin-bottom: 70px;
+
+            margin-top: 20px;
+
+        }
+
+
+
+        h1.page-title span {
+
+            opacity: 0;
+
+            display: inline-block;
+
+            animation: fadeInDownLetter 1.5s ease forwards;
+
+        }
+
+
+
+        h1.page-title span:nth-child(1) { animation-delay: 0.1s; }
+
+        h1.page-title span:nth-child(2) { animation-delay: 0.2s; }
+
+        h1.page-title span:nth-child(3) { animation-delay: 0.3s; }
+
+        h1.page-title span:nth-child(4) { animation-delay: 0.4s; }
+
+        h1.page-title span:nth-child(5) { animation-delay: 0.5s; }
+
+        h1.page-title span:nth-child(6) { animation-delay: 0.6s; }
+
+        h1.page-title span:nth-child(7) { animation-delay: 0.7s; }
+
+        h1.page-title span:nth-child(8) { animation-delay: 0.8s; }
+
+
+
+
+
+        /* === HAKKIMDA İÇERİK ALANI === */
+
+        .about-container {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 70px;
+
+            max-width: 1100px;
+
+            width: 100%;
+
+            margin-bottom: 60px;
+
+            opacity: 0;
+
+            animation: fadeInUp 1.5s ease forwards 0.8s;
+
+            text-align: left;
+
+        }
+
+
+
+        /* FOTOĞRAF ALANI */
+
+        .image-wrapper {
+
+            position: relative;
+
+            width: 350px;
+
+            height: 450px;
+
+            flex-shrink: 0;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            border: 2px solid #9D9167;
+
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+
+        }
+
+
+
+        .profile-photo {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            filter: sepia(0.6) hue-rotate(-15deg) contrast(1.1) brightness(0.95);
+
+            transition: transform 0.6s ease;
+
+        }
+
+
+
+        .image-wrapper::after {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0; left: 0; width: 100%; height: 100%;
+
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.30' style='mix-blend-mode: soft-light;'/%3E%3C/svg%3E");
+
+            pointer-events: none;
+
+            opacity: 0.5;
+
+        }
+
+
+
+        .image-wrapper:hover .profile-photo {
+
+            transform: scale(1.05);
+
+            filter: sepia(0) hue-rotate(0) contrast(1) brightness(1);
+
+        }
+
+
+
+
+
+        /* METİN ALANI - GÜNCELLENDİ */
+
+        .bio-content {
+
+            max-width: 550px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 25px;
+
+        }
+
+
+
+        .bio-text {
+
+            font-family: 'Raleway', sans-serif;
+
+            font-size: 1.35rem;
+
+            line-height: 1.6;
+
+            /* BURASI GÜNCELLENDİ: 300'den 400'e çektik (Biraz daha okunaklı) */
+
+            font-weight: 400;
+
+            color: rgba(232, 209, 167, 0.95);
+
+            letter-spacing: 0.5px;
+
+        }
+
+
+
+        .highlight {
+
+            color: #E8D1A7;
+
+            font-weight: 600; /* Vurgular bir tık daha belirgin olsun diye 600 yaptım */
+
+            border-bottom: 1px solid rgba(232, 209, 167, 0.3);
+
+        }
+
+
+
+        /* KUTLAMA BUTONU ALANI */
+
+        .celebrate-trigger {
+
+            align-self: flex-start;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 12px 35px;
+
+            background: rgba(157, 145, 103, 0.1);
+
+            border: 1px solid #9D9167;
+
+            border-radius: 50px;
+
+            cursor: pointer;
+
+            transition: all 0.4s ease;
+
+           
+
+            font-family: 'Raleway', sans-serif;
+
+            font-size: 0.95rem;
+
+            font-weight: 400; /* Buton yazısını da metinle uyumlu yaptım */
+
+           
+
+            color: #E8D1A7;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+        }
+
+
+
+        .celebrate-trigger:hover {
+
+            background: #84592B;
+
+            color: white;
+
+            border-color: #E8D1A7;
+
+            transform: translateY(-3px);
+
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+
+        }
+
+       
+
+        /* === ALT MENÜ === */
+
+        .menu-container {
+
+            display: flex;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+
+            justify-content: center;
+
+            opacity: 0;
+
+            animation: fadeInUp 1.5s ease forwards 1.5s;
+
+            margin-top: auto;
+
+            padding-top: 30px;
+
+            border-top: 1px solid rgba(157, 145, 103, 0.3);
+
+            width: 100%;
+
+            max-width: 800px;
+
+        }
+
+
+
+        .menu-btn {
+
+            text-decoration: none;
+
+            color: #E8D1A7;
+
+            font-size: 0.9rem;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            padding: 12px 30px;
+
+            border: 1px solid #9D9167;
+
+            border-radius: 50px;
+
+            background-color: transparent;
+
+            transition: all 0.4s ease;
+
+            font-family: 'Raleway', sans-serif;
+
+            font-weight: 400; /* Menü de uyumlu */
+
+        }
+
+
+
+        .menu-btn:hover {
+
+            background-color: #84592B;
+
+            border-color: #E8D1A7;
+
+            color: #fff;
+
+            box-shadow: 0 5px 15px rgba(132, 89, 43, 0.4);
+
+            transform: translateY(-3px);
+
+        }
+
+
+
+        /* === ANİMASYONLAR === */
+
+        @keyframes fadeInDownLetter {
+
+            from { opacity: 0; transform: translateY(-30px); filter: blur(5px); }
+
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+
+        }
+
+
+
+        @keyframes fadeInUp {
+
+            from { opacity: 0; transform: translateY(40px); }
+
+            to { opacity: 1; transform: translateY(0); }
+
+        }
+
+
+
+        /* === MOBİL UYUMLULUK === */
+
+        @media (max-width: 900px) {
+
+            h1.page-title {
+
+                font-size: 3rem;
+
+                gap: 0.8rem;
+
+                flex-wrap: wrap;
+
+            }
+
+            .about-container {
+
+                flex-direction: column;
+
+                gap: 40px;
+
+                text-align: center;
+
+            }
+
+            .image-wrapper {
+
+                width: 280px;
+
+                height: 350px;
+
+            }
+
+            .bio-content {
+
+                width: 100%;
+
+                align-items: center;
+
+            }
+
+            .celebrate-trigger {
+
+                align-self: center;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <h1 class="page-title">
+
+        <span>H</span>
+
+        <span>A</span>
+
+        <span>K</span>
+
+        <span>K</span>
+
+        <span>I</span>
+
+        <span>M</span>
+
+        <span>D</span>
+
+        <span>A</span>
+
+    </h1>
+
+
+
+    <div class="about-container">
+
+       
+
+        <div class="image-wrapper">
+
+            <img src="resim1.jpeg" alt="Hale Betül Yıldız" class="profile-photo">
+
+        </div>
+
+
+
+        <div class="bio-content">
+
+            <p class="bio-text">
+
+                Merhaba, ben <span class="highlight">Hale Betül Yıldız</span>. İstanbul Kent Üniversitesi Bilgisayar Programcılığı öğrencisiyim.
+
+                <br><br>
+
+             Ana odağım ürün yönetimi ve front-end geliştirme, aktif olarak farklı ürünler üzerine product case’ler ve mini projeler üretiyorum. Bu projelerde kullanıcı problemlerini analiz etmeye, çözüm fikirleri geliştirmeye ve ürün bakış açımı güçlendirmeye odaklanıyorum.
+
+             <br><br>
+
+             Şu anda Kodluyoruz bünyesinde teknik gönüllü olarak yer alıyor, farklı projelerinde aktif sorumluluk üstleniyorum. Aynı zamanda Teens in Innovation’da Topluluk Geliştirici olarak etkinlik süreçleri ve topluluk organizasyonlarından sorumluyum.
+
+             Insider Code Academy’de front-end ve soft skill odaklı bir eğitim sürecinden geçerek hem teknik hem iletişim tarafında kendimi geliştirme fırsatı buldum.
+
+            <br><br>
+
+             Bunlara ek olarak Hayal Gücü Merkezi, Stellar Lab, Solana Allstars ve çeşitli teknoloji topluluklarında yer aldım. Genel olarak ürün odaklı düşünme, ekiplerle çalışma ve sürekli öğrenme motivasyonu yüksek biriyim; hedefim ürün yönetimi alanında güçlü bir kariyer inşa etmek.
+
+            </p>
+
+           
+
+            <div class="celebrate-trigger" id="celebrateBtn">
+
+                Tanışmamızı Kutla!
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <nav class="menu-container">
+
+        <a href="index.html" class="menu-btn">Ana Sayfa</a>
+
+        <a href="calismalar.html" class="menu-btn">Çalışmalar</a>
+
+        <a href="hakkimda.html" class="menu-btn" style="background-color: #84592B; color: #fff; border-color: #E8D1A7;">Hakkımda</a>
+
+        <a href="iletisim.html" class="menu-btn">İletişim</a>
+
+        <a href="cv-dosya.pdf" class="menu-btn" download>CV</a>
+
+    </nav>
+
+
+
+    <script>
+
+        document.getElementById('celebrateBtn').addEventListener('click', function(e) {
+
+            const rect = e.target.getBoundingClientRect();
+
+            const x = (rect.left + rect.width / 2) / window.innerWidth;
+
+            const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+
+
+            confetti({
+
+                particleCount: 150,
+
+                spread: 80,
+
+                origin: { x: x, y: y },
+
+                colors: ['#E8D1A7', '#9D9167', '#442D1C', '#ffffff', '#d4af37'],
+
+                disableForReducedMotion: true
+
+            });
+
+        });
+
+    </script>
+
+
+
+</body>
+
+</html>

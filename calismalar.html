@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çalışmalar | Hale</title>
+       <link rel="icon" type="image/png" href="fav.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300&display=swap" rel="stylesheet">
+
+    <style>
+        /* === GENEL AYARLAR === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #442D1C;
+            color: #E8D1A7;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        /* === ANA BAŞLIK (ÇALIŞMALAR) === */
+        h1.page-title {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 200;
+            font-size: 5rem;
+            color: #E8D1A7;
+            text-transform: uppercase;
+            line-height: 1;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 10px; /* Alt başlık için boşluğu azalttım */
+            margin-top: 20px;
+        }
+
+        h1.page-title span {
+            opacity: 0;
+            display: inline-block;
+            animation: fadeInDownLetter 1.5s ease forwards;
+        }
+
+        /* === YENİ EKLENEN ARA BAŞLIK (ÖNE ÇIKANLAR) === */
+        h2.section-subtitle {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 300;
+            font-size: 1.1rem; /* Kibar ve küçük */
+            letter-spacing: 8px; /* Harfleri iyice açarak modern hava verdik */
+            color: rgba(232, 209, 167, 0.7); /* Ana renkten biraz daha soluk */
+            text-transform: uppercase;
+            margin-bottom: 50px; /* Grid ile arasındaki boşluk */
+            opacity: 0;
+            animation: fadeInUp 1.5s ease forwards 1.0s; /* Başlıktan hemen sonra gelir */
+        }
+
+        /* Harf animasyon gecikmeleri */
+        h1.page-title span:nth-child(1) { animation-delay: 0.1s; }
+        h1.page-title span:nth-child(2) { animation-delay: 0.2s; }
+        h1.page-title span:nth-child(3) { animation-delay: 0.3s; }
+        h1.page-title span:nth-child(4) { animation-delay: 0.4s; }
+        h1.page-title span:nth-child(5) { animation-delay: 0.5s; }
+        h1.page-title span:nth-child(6) { animation-delay: 0.6s; }
+        h1.page-title span:nth-child(7) { animation-delay: 0.7s; }
+        h1.page-title span:nth-child(8) { animation-delay: 0.8s; }
+        h1.page-title span:nth-child(9) { animation-delay: 0.9s; }
+        h1.page-title span:nth-child(10) { animation-delay: 1.0s; }
+
+
+        /* === PROJE IZGARASI (GRID) === */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease forwards 1.2s;
+        }
+
+        /* === PROJE KARTI === */
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #9D9167;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: left;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(232, 209, 167, 0.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border-color: #E8D1A7;
+        }
+
+        .project-date {
+            font-size: 0.8rem;
+            color: #9D9167;
+            margin-bottom: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 400;
+            color: #E8D1A7;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: rgba(232, 209, 167, 0.85);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        /* Yetenek Etiketleri */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid rgba(157, 145, 103, 0.3);
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 5px 12px;
+            border-radius: 20px;
+            background-color: rgba(157, 145, 103, 0.2);
+            color: #E8D1A7;
+            font-weight: 500;
+        }
+
+        /* === GİZLİLİK NOTU === */
+        .confidential-note {
+            font-size: 0.85rem;
+            color: #9D9167;
+            font-style: italic;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease forwards 1.5s;
+            max-width: 600px;
+        }
+
+        /* === ALT MENÜ === */
+        .menu-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease forwards 1.8s;
+            margin-top: auto;
+            padding-top: 20px;
+        }
+
+        .menu-btn {
+            text-decoration: none;
+            color: #E8D1A7;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 12px 30px;
+            border: 1px solid #9D9167;
+            border-radius: 50px;
+            background-color: transparent;
+            transition: all 0.4s ease;
+        }
+
+        .menu-btn:hover {
+            background-color: #84592B;
+            border-color: #E8D1A7;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(132, 89, 43, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* === ANİMASYONLAR === */
+        @keyframes fadeInDownLetter {
+            from { opacity: 0; transform: translateY(-30px); filter: blur(5px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === MOBİL UYUMLULUK === */
+        @media (max-width: 768px) {
+            h1.page-title {
+                font-size: 3rem;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            h2.section-subtitle {
+                font-size: 0.9rem;
+                letter-spacing: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="page-title">
+        <span>Ç</span>
+        <span>A</span>
+        <span>L</span>
+        <span>I</span>
+        <span>Ş</span>
+        <span>M</span>
+        <span>A</span>
+        <span>L</span>
+        <span>A</span>
+        <span>R</span>
+    </h1>
+
+    <h2 class="section-subtitle">ÖNE ÇIKANLAR</h2>
+
+    <div class="projects-grid">
+
+        <div class="project-card">
+            <span class="project-date">Kasım 2025</span>
+            <h3 class="project-title">Product Overview for Therapy Apps</h3>
+            <p class="project-desc">
+                Heltia ve Hiwell'in ürün deneyimi, tasarım akışları ve kullanıcı odaklı yaklaşımlarının analizi. Onboarding süreçleri, terapist eşleşmesi ve well-being alışkanlıklarını destekleyen yöntemler karşılaştırılarak her iki platformun güçlü ve gelişime açık yönleri belirlendi.
+            </p>
+            <div class="tags-container">
+                <span class="tag">Research Skills</span>
+                <span class="tag">User Experience</span>
+                <span class="tag">Benchmarking</span>
+                <span class="tag">Product Thinking</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <span class="project-date">Kasım 2025</span>
+            <h3 class="project-title">User Insight Analysis & Recommendations</h3>
+            <p class="project-desc">
+                Wiser ve KitUP uygulamaları için Google Play yorumları üzerinden yapılan kapsamlı analiz çalışması. Kullanıcı geri bildirimlerinden elde edilen içgörülerle problem alanları tespit edildi, önceliklendirildi ve ürün geliştirme süreçlerine yönelik çözüm önerileri sunuldu.
+            </p>
+            <div class="tags-container">
+                <span class="tag">Customer Insight</span>
+                <span class="tag">Comparative Thinking</span>
+                <span class="tag">User Analysis</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <span class="project-date">Ekim 2025</span>
+            <h3 class="project-title">Beije & Pepapp Benchmarking</h3>
+            <p class="project-desc">
+                Pepapp ve Beije uygulamalarının onboarding süreçleri ve kullanıcı deneyimlerinin karşılaştırılması. Forum üzerinden 15 katılımcı ile gerçekleştirilen bu çalışma, gerçek kullanıcı deneyimlerine dayalı bir mini benchmarking analizidir.
+            </p>
+            <div class="tags-container">
+                <span class="tag">Rekabet Analizi</span>
+                <span class="tag">Report Writing</span>
+                <span class="tag">Product Thinking</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <span class="project-date">Ekim 2025</span>
+            <h3 class="project-title">Problem to Product: AI Guide</h3>
+            <p class="project-desc">
+                Kullanıcıların doğru AI aracını bulmasını sağlamak için tasarlanmış statik demo çalışması. Landing page, AI Agent Library ve Pricing sayfalarından oluşan bu tasarım, ürünün bilgi mimarisini ve değer önerisini somutlaştırmak amacıyla hazırlandı.
+            </p>
+            <div class="tags-container">
+                <span class="tag">Figma</span>
+                <span class="tag">Value Proposition</span>
+                <span class="tag">User Insight</span>
+                <span class="tag">Problem Analysis</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <span class="project-date">Eylül 2025</span>
+            <h3 class="project-title">Growth Experiment: Meditopia</h3>
+            <p class="project-desc">
+                Meditopia uygulaması özelinde büyüme odaklı zihniyet geliştirme çalışması. Hipotez, deney planı ve beklenen sonuç çerçevesinde; referral, oyunlaştırma (gamification) ve sosyal büyüme stratejileri üzerine kurgular geliştirildi.
+            </p>
+            <div class="tags-container">
+                <span class="tag">Growth Strategies</span>
+                <span class="tag">Product Growth</span>
+                <span class="tag">Experiment Design</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <span class="project-date">Eylül 2025</span>
+            <h3 class="project-title">Simulated Data Onboarding Analysis</h3>
+            <p class="project-desc">
+                Sanal bir "To-Do List" uygulaması için simüle edilmiş 20 kullanıcılık veri seti ile onboarding analizi. Satış hunisini optimize etmek ve kullanıcı benimsemesini (adoption) artırmak amacıyla Excel ve Canva kullanılarak yapılan veri odaklı karar alma simülasyonu.
+            </p>
+            <div class="tags-container">
+                <span class="tag">Data Analysis</span>
+                <span class="tag">Visualization</span>
+                <span class="tag">Product Management</span>
+            </div>
+        </div>
+
+    </div>
+
+    <p class="confidential-note">
+        * Projelere dair detaylı veriler ve raporlar gizli tutulmakta olup, yalnızca uygun koşullarda ve talep üzerine paylaşılmaktadır.
+    </p>
+
+    <nav class="menu-container">
+        <a href="index.html" class="menu-btn">Ana Sayfa</a>
+        <a href="#" class="menu-btn" style="background-color: #84592B; color: #fff; border-color: #E8D1A7;">Çalışmalar</a>
+        <a href="hakkimda.html" class="menu-btn">Hakkımda</a>
+        <a href="iletisim.html" class="menu-btn">İletişim</a>
+         <a href="calismalar.html" class="menu-btn">Çalışmalar</a>
+        <a href="cv-dosya.pdf" class="menu-btn" download>CV</a>
+    </nav>
+
+</body>
+</html>

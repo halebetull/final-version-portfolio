@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim | Hale</title>
+      <link rel="icon" type="image/png" href="fav.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300&display=swap" rel="stylesheet">
+
+    <style>
+        /* === GENEL AYARLAR === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #442D1C;
+            color: #E8D1A7;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Sayfayı dikeyde ortalar */
+            min-height: 100vh;
+            text-align: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        /* === BAŞLIK === */
+        h1.page-title {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 200;
+            font-size: 6rem;
+            color: #E8D1A7;
+            text-transform: uppercase;
+            line-height: 1;
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            
+            /* GÜNCELLEME: Kartlardan daha da uzaklaştırdım */
+            margin-bottom: 90px; 
+            margin-top: 20px;
+        }
+
+        h1.page-title span {
+            opacity: 0;
+            display: inline-block;
+            animation: fadeInDownLetter 1.5s ease forwards;
+        }
+        
+        h1.page-title span:nth-child(1) { animation-delay: 0.2s; }
+        h1.page-title span:nth-child(2) { animation-delay: 0.4s; }
+        h1.page-title span:nth-child(3) { animation-delay: 0.6s; }
+        h1.page-title span:nth-child(4) { animation-delay: 0.8s; }
+        h1.page-title span:nth-child(5) { animation-delay: 1.0s; }
+        h1.page-title span:nth-child(6) { animation-delay: 1.2s; }
+        h1.page-title span:nth-child(7) { animation-delay: 1.4s; }
+        h1.page-title span:nth-child(8) { animation-delay: 1.6s; }
+
+        /* === KARTLAR ALANI (GRID SİSTEMİ) === */
+        .cards-container {
+            display: grid; 
+            grid-template-columns: 1fr 1fr; /* 2 Eşit Sütun */
+            
+            /* GÜNCELLEME: Kartlar arası boşluğu (gap) arttırdım */
+            gap: 50px; 
+            
+            width: 100%;
+            /* GÜNCELLEME: Konteyneri genişleterek kartları büyüttüm */
+            max-width: 750px; 
+            
+            margin: 0 auto 80px auto; /* Alttan da boşluk bıraktım */
+            opacity: 0;
+            animation: fadeInUp 1.5s ease forwards 1.8s;
+        }
+
+        /* Kart Tasarımı */
+        .contact-card {
+            text-decoration: none;
+            color: #E8D1A7;
+            border: 1px solid #9D9167;
+            width: 100%;
+            
+            /* GÜNCELLEME: Kart yüksekliğini arttırdım */
+            height: 240px; 
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 6px;
+        }
+
+        .contact-card:hover {
+            background-color: #E8D1A7;
+            color: #442D1C;
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+            border-color: #E8D1A7;
+            z-index: 10;
+        }
+
+        .card-title {
+            /* Yazı boyutunu hafif büyüttüm */
+            font-size: 1.4rem; 
+            letter-spacing: 2px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        .card-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        .contact-card svg {
+            /* İkonları büyüttüm */
+            width: 55px; 
+            height: 55px;
+            fill: currentColor;
+            transition: transform 0.5s ease;
+        }
+
+        .contact-card:hover svg {
+            transform: scale(1.15);
+        }
+
+        /* === ALT MENÜ === */
+        .menu-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease forwards 2.2s;
+            margin-top: auto;
+            padding-top: 20px;
+        }
+
+        .menu-btn {
+            text-decoration: none;
+            color: #E8D1A7;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 12px 30px;
+            border: 1px solid #9D9167;
+            border-radius: 50px;
+            background-color: transparent;
+            transition: all 0.4s ease;
+        }
+
+        .menu-btn:hover {
+            background-color: #84592B;
+            border-color: #E8D1A7;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(132, 89, 43, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* === ANİMASYONLAR === */
+        @keyframes fadeInDownLetter {
+            from { opacity: 0; transform: translateY(-30px); filter: blur(5px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === MOBİL UYUMLULUK === */
+        @media (max-width: 768px) {
+            h1.page-title {
+                font-size: 3.5rem;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                margin-bottom: 50px; /* Mobilde boşluğu biraz azaltıyoruz */
+            }
+            .cards-container {
+                grid-template-columns: 1fr; /* Mobilde tek sıra */
+                max-width: 320px;
+                gap: 25px;
+            }
+            .contact-card {
+                height: 180px; /* Mobilde biraz daha kısa */
+                flex-direction: row; 
+                padding: 0 30px;
+                justify-content: flex-start;
+            }
+            .contact-card svg {
+                width: 40px;
+                height: 40px;
+            }
+            .card-info {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="page-title">
+        <span>İ</span>
+        <span>L</span>
+        <span>E</span>
+        <span>T</span>
+        <span>İ</span>
+        <span>Ş</span>
+        <span>İ</span>
+        <span>M</span>
+    </h1>
+
+    <div class="cards-container">
+        
+        <a href="https://www.linkedin.com/in/haleyildizz/" target="_blank" class="contact-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <div class="card-info">
+                <span class="card-title">LinkedIn</span>
+                <span class="card-subtitle">Profilimi Ziyaret Et</span>
+            </div>
+        </a>
+
+        <a href="https://github.com/halebetull" target="_blank" class="contact-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <div class="card-info">
+                <span class="card-title">GitHub</span>
+                <span class="card-subtitle">Projelerim & Kodlarım</span>
+            </div>
+        </a>
+
+        <a href="https://medium.com/@halebett" target="_blank" class="contact-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.846 6.887c.03-.295-.083-.586-.303-.784l-2.24-2.7v-.403h6.958l5.378 11.795 4.728-11.795h6.633v.403l-1.916 1.837c-.165.126-.247.333-.213.538v13.498c-.034.204.048.411.213.537l1.871 1.837v.403h-9.412v-.403l1.939-1.882c.19-.19.19-.246.19-.537v-10.91l-5.389 13.688h-.728l-6.275-13.688v9.174c-.052.385.076.774.347 1.052l2.521 3.058v.404h-7.148v-.404l2.521-3.058c.27-.279.39-.67.325-1.052v-10.608z"/></svg>
+            <div class="card-info">
+                <span class="card-title">Medium</span>
+                <span class="card-subtitle">Blog Yazılarım</span>
+            </div>
+        </a>
+
+        <a href="mailto:mailadresin@example.com" class="contact-card">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm6.623 7.929l-6.623 5.772v-11.547l6.623 5.775zm4.377 3.818l-5-4.358-5 4.358v-2.498l5-4.358 5 4.358v2.498zm13-6.498l-6.623 5.772 6.623 5.775v-11.547zm-6.623 10.275l-5-4.358-5 4.358v2.498l5-4.358 5 4.358v-2.498z"/></svg>
+            <div class="card-info">
+                <span class="card-title">E-Posta</span>
+                <span class="card-subtitle">Bana Ulaşın</span>
+            </div>
+        </a>
+
+    </div>
+
+    <nav class="menu-container">
+        <a href="index.html" class="menu-btn">Ana Sayfa</a>
+        <a href="calismalar.html" class="menu-btn">Çalışmalar</a>
+        <a href="hakkimda.html" class="menu-btn">Hakkımda</a>
+           
+        <a href="#" class="menu-btn" style="background-color: #84592B; color: #fff; border-color: #E8D1A7;">İletişim</a>
+        <a href="cv-dosya.pdf" class="menu-btn" download>CV</a>
+    </nav>
+
+</body>
+</html>

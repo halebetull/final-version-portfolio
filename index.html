@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hale | Portfolio</title>
+     <link rel="icon" type="image/png" href="fav.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300&display=swap" rel="stylesheet">
+
+    <style>
+        /* Modern Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #442D1C; /* Koyu Kahve Arka Plan */
+            color: #E8D1A7; /* Altın/Krem Yazı Rengi */
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 30px;
+            overflow-x: hidden;
+        }
+
+        /* === ANA BAŞLIK AYARLARI (GÜNCELLENDİ) === */
+        h1.main-title {
+            font-family: 'Raleway', sans-serif;
+            
+            /* GÜNCELLEME: Kalınlık 100'den 200'e çıkarıldı (biraz daha belirgin) */
+            font-weight: 200; 
+            
+            font-size: 8rem;
+            color: #E8D1A7;
+            margin-bottom: 40px;
+            margin-top: 30px;
+            text-transform: uppercase;
+            line-height: 1;
+            display: flex;
+            
+            /* GÜNCELLEME: Harf boşluğu 1.5rem'den 2.5rem'e çıkarıldı */
+            gap: 2.5rem; 
+            
+            justify-content: center;
+        }
+
+        /* Her bir harf için özel ayar */
+        h1.main-title span {
+            opacity: 0; /* Başlangıçta görünmez */
+            display: inline-block;
+            animation: fadeInDownLetter 1.5s ease forwards;
+        }
+
+        /* Harflerin sırayla gelmesi için gecikmeler */
+        h1.main-title span:nth-child(1) { animation-delay: 0.3s; } /* H */
+        h1.main-title span:nth-child(2) { animation-delay: 0.7s; } /* A */
+        h1.main-title span:nth-child(3) { animation-delay: 1.1s; } /* L */
+        h1.main-title span:nth-child(4) { animation-delay: 1.5s; } /* E */
+
+
+        /* === PROFIL RESMİ AYARLARI === */
+        .profile-container {
+            position: relative;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeIn 2s ease forwards 2s;
+        }
+
+        .profile-img {
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center center;
+            border: 3px solid #9D9167;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            transition: transform 0.5s ease, border-color 0.5s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.03);
+            border-color: #E8D1A7;
+        }
+
+        /* === HAKKIMDA METNİ === */
+        .bio-text {
+            max-width: 650px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #E8D1A7;
+            font-weight: 300;
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease forwards 2.3s;
+        }
+
+        /* === MENÜ BUTONLARI === */
+        .menu-container {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease forwards 2.6s;
+            margin-bottom: 30px;
+        }
+
+        .menu-btn {
+            text-decoration: none;
+            color: #E8D1A7;
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 14px 35px;
+            border: 1px solid #9D9167;
+            border-radius: 50px;
+            background-color: transparent;
+            transition: all 0.4s ease;
+        }
+
+        .menu-btn:hover {
+            background-color: #84592B;
+            border-color: #E8D1A7;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(132, 89, 43, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .menu-btn.cv-btn {
+            background-color: rgba(157, 145, 103, 0.1);
+        }
+
+        /* === ANİMASYON TANIMLARI === */
+        @keyframes fadeInDownLetter {
+            from { opacity: 0; transform: translateY(-30px); filter: blur(5px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; scale: 0.95; }
+            to { opacity: 1; scale: 1; }
+        }
+
+        /* === MOBİL UYUMLULUK === */
+        @media (max-width: 768px) {
+            h1.main-title {
+                font-size: 4rem;
+                gap: 1rem; /* Mobilde boşluğu biraz kıstım ki taşmasın */
+                margin-bottom: 30px;
+            }
+            .profile-img {
+                width: 280px;
+                height: 280px;
+            }
+            .bio-text {
+                font-size: 1rem;
+            }
+            .menu-container {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+                max-width: 320px;
+            }
+            .menu-btn {
+                width: 100%;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="main-title">
+        <span>H</span>
+        <span>A</span>
+        <span>L</span>
+        <span>E</span>
+    </h1>
+
+    <div class="profile-container">
+        <img src="resim.jpeg" alt="Hale Profil Fotoğrafı" class="profile-img">
+    </div>
+
+    <p class="bio-text">
+        Ben Hale Betül Yıldız. Bilgisayar Programcılığı öğrencisiyim; Product Management ve yazılım alanlarında üretmeye, öğrenmeye ve deneyim kazanmaya odaklanıyorum. Detaylar için aşağıdaki butonlara tıklayabilirsiniz.
+    </p>
+
+    <nav class="menu-container">
+        <a href="i" class="menu-btn">Ana Sayfa</a>
+        <a href="calismalar.html" class="menu-btn">Çalışmalar</a>
+        <a href="hakkimda.html" class="menu-btn">Hakkımda</a>
+        <a href="iletisim.html" class="menu-btn">İletişim</a>
+        <a href="cv-dosya.pdf" class="menu-btn cv-btn" download>CV</a>
+    </nav>
+
+</body>
+</html>
